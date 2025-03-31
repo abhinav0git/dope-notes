@@ -1,7 +1,7 @@
 "use client"; //as we are using useState hook
 
 import { Button } from "@/components/ui/button";
-import { Loader2Icon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ function LogoutButton() {
     const handleLogout = async () => {
         setLoading(true);
 
-        await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate a network request
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a network request
 
         const errorMsg = null;
 
@@ -37,7 +37,7 @@ function LogoutButton() {
             disabled={loading}
             className="w-18"
         >
-            {loading ? (<Loader2Icon className="animate-spin" />) : "LogOut"}
+            {loading ? (<Loader2 className="animate-spin" />) : "LogOut"}
         </Button>
     )
 }
