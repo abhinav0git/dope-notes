@@ -16,7 +16,8 @@ type Props = {
 
 function AuthForm({ type }: Props) {
     const isLoginForm = type === "login";
-    console.log(isLoginForm);
+    console.log(isLoginForm ? "Login Form" : "Sign Up Form");
+
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
@@ -35,6 +36,7 @@ function AuthForm({ type }: Props) {
                         type="email"
                         placeholder="Enter your email"
                         className="mt-2"
+                        autoComplete="email"
                         required
                         disabled={isPending}
                     />
