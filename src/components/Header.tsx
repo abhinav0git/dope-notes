@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { shadow } from '@/styles/utils';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/DarkModeToggle';
-import LogoutButton from '@/components/LogoutButton';
+import LogOutButton from '@/components/LogoutButton';
 import { getUser } from '@/app/auth/server';
 
 const Header: React.FC = async () => {
@@ -29,7 +29,7 @@ const Header: React.FC = async () => {
 
             <div className="flex gap-4">
                 {user ?
-                    (<LogoutButton />) :
+                    (<LogOutButton />) :
                     (
                         <>
                             <Button asChild>
