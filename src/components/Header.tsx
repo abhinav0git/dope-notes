@@ -4,10 +4,10 @@ import { shadow } from '@/styles/utils';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/DarkModeToggle';
 import LogoutButton from '@/components/LogoutButton';
+import { getUser } from '@/app/auth/server';
 
-const Header = () => {
-    const user = 1;
-
+const Header: React.FC = async () => {
+    const user = await getUser();
     return (
         <header
             className="relative flex h-24 w-full items-center justify-between bg-popover px-3 sm:px-8"

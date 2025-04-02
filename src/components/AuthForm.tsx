@@ -9,6 +9,7 @@ import { useTransition } from "react";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { loginAction, signUpAction } from "@/actions/users";
 
 type Props = {
     type: "login" | "sign-up"
@@ -22,7 +23,37 @@ function AuthForm({ type }: Props) {
     const [isPending, startTransition] = useTransition();
 
     const handleSubmit = async (formData: FormData) => {
-        toast.success("Welcome User!");
+
+
+        startTransition(async () => {
+            const email = formData.get("email") as string;
+            const password = formData.get("password") as string;
+
+            let errorMessage;
+            let title;
+            let description;
+
+            if (isLoginForm) {
+                errorMessage = (await loginAction(email, password)).errorMessage;
+                title = "Logged in";
+                description = "You have successfully logged in.";
+            }
+            else {
+                errorMessage = (await signUpAction(email, password)).errorMessage;
+                title = "Signed Up";
+                description = "Check your email for verification.";
+            }
+
+            if (!errorMessage) {
+                toast.message(title, {
+                    description
+                });
+                router.replace("/");
+            }
+            else {
+                toast.error(errorMessage)
+            }
+        });
     }
 
     return (
@@ -36,7 +67,6 @@ function AuthForm({ type }: Props) {
                         type="email"
                         placeholder="Enter your email"
                         className="mt-2"
-                        autoComplete="email"
                         required
                         disabled={isPending}
                     />
@@ -49,7 +79,6 @@ function AuthForm({ type }: Props) {
                         type="password"
                         placeholder="Enter your password"
                         className="mt-2"
-                        autoComplete="current-password"
                         required
                         disabled={isPending}
                     />
@@ -73,3 +102,7 @@ function AuthForm({ type }: Props) {
 }
 
 export default AuthForm;
+// function signupAction(email: string, password: string) {
+//     throw new Error("Function not implemented.");
+// }
+

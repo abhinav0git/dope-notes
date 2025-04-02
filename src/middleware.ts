@@ -15,7 +15,8 @@ export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   })
-  console.log("middleware fired")
+  console.log("middleware fired");
+
   // const supabase = createServerClient(
   //   process.env.SUPABASE_URL!,
   //   process.env.SUPABASE_ANON_KEY!,
@@ -35,13 +36,7 @@ export async function updateSession(request: NextRequest) {
   //       },
   //     },
   //   }
-  // )
-
-  // Do not run code between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-  // issues with users being randomly logged out.
-
-  // IMPORTANT: DO NOT REMOVE auth.getUser()
+  // );
 
   // const {
   //   data: { user },
